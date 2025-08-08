@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lemonade - Retro Clothing Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <div class="brand-name" onclick="scrollToTop()">
+                    <span class="brand-text">LEMONADE</span>
+                    <span class="brand-year">EST. 1985</span>
+                </div>
+                <div class="user-section">
+                    <button class="login-btn" onclick="openModal('loginModal')" id="loginBtn">
+                        <span class="btn-text">LOGIN</span>
+                    </button>
+                    <button class="profile-btn" onclick="openModal('profileModal')" id="profileBtn" style="display: none;">
+                        <span class="btn-text">PROFILE</span>
+                    </button>
+                    <button class="cart-icon" onclick="openModal('cartModal')">
+                        <span class="cart-symbol">📦</span>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul class="nav-menu">
+                    <li><a href="#home">HOME</a></li>
+                    <li><a href="#new-arrivals">NEW ARRIVALS</a></li>
+                    <li><a href="#men">MEN</a></li>
+                    <li><a href="#women">WOMEN</a></li>
+                    <li><a href="#accessories">ACCESSORIES</a></li>
+                    <li><a href="#sale">SALE</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="hero-line">RETRO</span>
+                        <span class="hero-line">FASHION</span>
+                        <span class="hero-line">REVIVAL</span>
+                    </h1>
+                    <p class="hero-subtitle">Experience the golden age of style</p>
+                    <div class="hero-cta">
+                        <button class="cta-btn primary" onclick="scrollToProducts()">
+                            <span class="btn-text">SHOP NOW</span>
+                        </button>
+                        <button class="cta-btn secondary">
+                            <span class="btn-text">CATALOG</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-graphics">
+                    <div class="retro-shape shape-1"></div>
+                    <div class="retro-shape shape-2"></div>
+                    <div class="retro-shape shape-3"></div>
+                    <div class="retro-shape shape-4"></div>
+                    <div class="scanlines"></div>
+                    <div class="grid-pattern"></div>
+                </div>
+            </div>
+
+            <!-- Products Section -->
+            <section class="products-section" id="new-arrivals">
+                <div class="section-header">
+                    <h2 class="section-title">FEATURED PRODUCTS</h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="products-grid" id="productsGrid">
+                    <!-- Sample Products -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <div class="product-placeholder">👕</div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">NEON WINDBREAKER</h3>
+                            <p class="product-price">$89.99</p>
+                            <button class="add-to-cart-btn" onclick="addToCart('neon-windbreaker')">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <div class="product-placeholder">👖</div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">RETRO JEANS</h3>
+                            <p class="product-price">$69.99</p>
+                            <button class="add-to-cart-btn" onclick="addToCart('retro-jeans')">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <div class="product-placeholder">👟</div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">CLASSIC SNEAKERS</h3>
+                            <p class="product-price">$129.99</p>
+                            <button class="add-to-cart-btn" onclick="addToCart('classic-sneakers')">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <div class="product-placeholder">🕶️</div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">RETRO SHADES</h3>
+                            <p class="product-price">$39.99</p>
+                            <button class="add-to-cart-btn" onclick="addToCart('retro-shades')">ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features-section">
+                <div class="section-header">
+                    <h2 class="section-title">WHY CHOOSE LEMONADE?</h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🚛</div>
+                        <h3 class="feature-title">FREE SHIPPING</h3>
+                        <p class="feature-description">Free delivery on orders over $50. Fast nationwide shipping.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⭐</div>
+                        <h3 class="feature-title">PREMIUM QUALITY</h3>
+                        <p class="feature-description">Authentic vintage styles with modern quality standards.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <h3 class="feature-title">EASY RETURNS</h3>
+                        <p class="feature-description">30-day return policy. Your satisfaction guaranteed.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📞</div>
+                        <h3 class="feature-title">24/7 SUPPORT</h3>
+                        <p class="feature-description">Our customer service team is always ready to help.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Newsletter Section -->
+            <section class="newsletter-section">
+                <div class="newsletter-content">
+                    <h2 class="newsletter-title">STAY IN THE LOOP</h2>
+                    <p class="newsletter-subtitle">Get the latest retro fashion updates</p>
+                    <div class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="ENTER YOUR EMAIL">
+                        <button class="newsletter-btn">SUBSCRIBE</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SHOP</h3>
+                    <ul>
+                        <li><a href="#new-arrivals">NEW ARRIVALS</a></li>
+                        <li><a href="#men">MEN'S CLOTHING</a></li>
+                        <li><a href="#women">WOMEN'S CLOTHING</a></li>
+                        <li><a href="#accessories">ACCESSORIES</a></li>
+                        <li><a href="#sale">SALE</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>CUSTOMER SERVICE</h3>
+                    <ul>
+                        <li><a href="#contact">CONTACT US</a></li>
+                        <li><a href="#shipping">SHIPPING INFO</a></li>
+                        <li><a href="#returns">RETURNS</a></li>
+                        <li><a href="#sizing">SIZE GUIDE</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>ABOUT LEMONADE</h3>
+                    <ul>
+                        <li><a href="#about">OUR STORY</a></li>
+                        <li><a href="#careers">CAREERS</a></li>
+                        <li><a href="#sustainability">SUSTAINABILITY</a></li>
+                        <li><a href="#blog">BLOG</a></li>
+                        <li><a href="#press">PRESS</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>CONNECT</h3>
+                    <div class="social-grid">
+                        <a href="#instagram" class="social-link">INSTAGRAM</a>
+                        <a href="#facebook" class="social-link">FACEBOOK</a>
+                        <a href="#twitter" class="social-link">TWITTER</a>
+                        <a href="#pinterest" class="social-link">PINTEREST</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-logo">LEMONADE</div>
+                <p>&copy; 2025 LEMONADE CLOTHING. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>LOGIN TO LEMONADE</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">EMAIL:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">PASSWORD:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="form-submit">LOGIN</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('profileModal')">&times;</span>
+            <h2>USER PROFILE</h2>
+            <div id="profileContent">
+                <p><strong>WELCOME BACK!</strong></p>
+                <p>EMAIL: <span id="userEmail"></span></p>
+                <button class="form-submit" onclick="logout()">LOGOUT</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('cartModal')">&times;</span>
+            <h2>SHOPPING CART</h2>
+            <div id="cartContent">
+                <p>YOUR CART IS EMPTY.</p>
+            </div>
+            <div id="cartTotal" style="display: none;">
+                <h3>TOTAL: $<span id="totalAmount">0</span></h3>
+                <button class="form-submit" onclick="checkout()">CHECKOUT</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Basic JavaScript functionality
+        let cart = [];
+        let isLoggedIn = false;
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function scrollToProducts() {
+            document.getElementById('new-arrivals').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function addToCart(productId) {
+            cart.push(productId);
+            updateCartCount();
+            // Simple animation for cart icon
+            const cartIcon = document.querySelector('.cart-icon');
+            cartIcon.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                cartIcon.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        function updateCartCount() {
+            document.getElementById('cartCount').textContent = cart.length;
+        }
+
+        function logout() {
+            isLoggedIn = false;
+            document.getElementById('loginBtn').style.display = 'block';
+            document.getElementById('profileBtn').style.display = 'none';
+            closeModal('profileModal');
+        }
+
+        function checkout() {
+            alert('Checkout functionality coming soon!');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            isLoggedIn = true;
+            document.getElementById('loginBtn').style.display = 'none';
+            document.getElementById('profileBtn').style.display = 'block';
+            document.getElementById('userEmail').textContent = document.getElementById('email').value;
+            closeModal('loginModal');
+        });
+
+        // Newsletter form
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for subscribing!');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS - Hypermodern Fashion</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --primary: #00ff88;
+            --secondary: #ff0080;
+            --tertiary: #0080ff;
+            --dark: #0a0a0a;
+            --darker: #000000;
+            --accent: #ffffff;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--darker);
+            color: var(--accent);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: all 0.1s ease;
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.3s ease;
+            opacity: 0.5;
+        }
+
+        /* Floating Orbs */
+        .floating-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--primary), transparent);
+            top: 10%;
+            left: 80%;
+            animation-delay: -5s;
+        }
+
+        .orb:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, var(--secondary), transparent);
+            top: 60%;
+            left: 10%;
+            animation-delay: -10s;
+        }
+
+        .orb:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--tertiary), transparent);
+            top: 30%;
+            left: 50%;
+            animation-delay: -15s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            25% { transform: translate(-100px, -50px) rotate(90deg) scale(1.1); }
+            50% { transform: translate(100px, -100px) rotate(180deg) scale(0.9); }
+            75% { transform: translate(-50px, 50px) rotate(270deg) scale(1.05); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            backdrop-filter: blur(30px) saturate(200%);
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--tertiary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: logoGlow 3s ease-in-out infinite alternate;
+            letter-spacing: -2px;
+        }
+
+        @keyframes logoGlow {
+            from { filter: drop-shadow(0 0 10px var(--primary)); }
+            to { filter: drop-shadow(0 0 20px var(--secondary)); }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            max-width: 1000px;
+            padding: 0 2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(4rem, 12vw, 8rem);
+            font-weight: 900;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, var(--accent), var(--primary), var(--secondary), var(--tertiary));
+            background-size: 400% 400%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 4s ease-in-out infinite, textFloat 6s ease-in-out infinite;
+            line-height: 0.9;
+            letter-spacing: -5px;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes textFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border: none;
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--darker);
+            border-radius: 0;
+            cursor: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: inherit;
+            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 100%, 20px 100%);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: inherit;
+            clip-path: polygon(20px 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--darker);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.2);
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .product-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px) saturate(200%);
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            cursor: none;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 30px 100%, 0 calc(100% - 30px));
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .product-card:hover::before {
+            left: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-20px) rotateX(5deg) rotateY(5deg);
+            border-color: var(--primary);
+            box-shadow: 0 30px 60px rgba(0, 255, 136, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--tertiary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) skewX(-15deg); }
+            100% { transform: translateX(200%) skewX(-15deg); }
+        }
+
+        .product-content {
+            padding: 2rem;
+        }
+
+        .product-card h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            color: var(--accent);
+            letter-spacing: -1px;
+        }
+
+        .product-card p {
+            opacity: 0.7;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+
+        .add-to-cart {
+            background: var(--primary);
+            color: var(--darker);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-weight: 700;
+            cursor: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            font-family: inherit;
+            clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 100%, 10px 100%);
+        }
+
+        .add-to-cart:hover {
+            background: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(20px 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
+        }
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--tertiary));
+            transform: scaleX(0);
+            transition: transform 0.6s ease;
+        }
+
+        .feature:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            display: block;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .feature h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .feature p {
+            opacity: 0.8;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(255, 0, 128, 0.1));
+            border: 1px solid var(--border);
+            padding: 5rem 3rem;
+            text-align: center;
+            margin: 8rem auto;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--tertiary), var(--primary));
+            background-size: 400% 400%;
+            animation: gradientBorder 4s ease-in-out infinite;
+            z-index: -1;
+            clip-path: inherit;
+        }
+
+        @keyframes gradientBorder {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1.5rem;
+            max-width: 600px;
+            margin: 3rem auto 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .newsletter input {
+            flex: 1;
+            min-width: 300px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            color: var(--accent);
+            font-size: 1.1rem;
+            font-family: inherit;
+            clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 15px 100%);
+        }
+
+        .newsletter input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .newsletter input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+        }
+
+        .newsletter button {
+            padding: 1.5rem 3rem;
+            background: var(--primary);
+            border: none;
+            color: var(--darker);
+            font-weight: 700;
+            cursor: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: inherit;
+            clip-path: polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%);
+        }
+
+        .newsletter button:hover {
+            background: var(--secondary);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 0, 128, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker);
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid var(--border);
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .social-links a {
+            color: var(--accent);
+            font-size: 2rem;
+            transition: all 0.3s ease;
+            cursor: none;
+            position: relative;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+            transform: translateY(-10px) scale(1.3);
+            text-shadow: 0 0 20px var(--primary);
+        }
+
+        .footer-text {
+            opacity: 0.6;
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .newsletter input {
+                min-width: auto;
+                width: 100%;
+                max-width: 400px;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--darker);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 1s ease;
+        }
+
+        .loading-text {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary);
+            animation: loadingPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes loadingPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Hide loading screen after page load */
+        body.loaded .loading-screen {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen">
+        <div class="loading-text">NEXUS</div>
+    </div>
+
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <div class="floating-orbs">
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">NEXUS</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">Features</a></li>
+                <li><a href="#contact">Connect</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+            <div class="hero-subtitle">Next Generation Fashion</div>
+            <h1>HYPERMODERN</h1>
+            <p>Experience the future of fashion with our revolutionary collection that blends cutting-edge technology, sustainable materials, and avant-garde design philosophy.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="scrollToSection('products')">Explore Universe</button>
+                <button class="btn-secondary">Watch Vision</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="fade-in">
+        <div class="section-header">
+            <div class="section-subtitle">Future Collection</div>
+            <h2 class="section-title">Revolutionary Pieces</h2>
+        </div>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">🚀</div>
+                <div class="product-content">
+                    <h3>Quantum Jacket</h3>
+                    <p>Self-regulating temperature technology with molecular-level fabric engineering</p>
+                    <div class="product-footer">
+                        <div class="product-price">$899</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(135deg, #ff0080, #ff6b6b, #4ecdc4);">⚡</div>
+                <div class="product-content">
+                    <h3>Neural Dress</h3>
+                    <p>Adaptive smart fabric that responds to environmental conditions and body metrics</p>
+                    <div class="product-footer">
+                        <div class="product-price">$649</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(135deg, #0080ff, #00ff88, #ff0080);">🌟</div>
+                <div class="product-content">
+                    <h3>Holographic Sneakers</h3>
+                    <p>Augmented reality integration with biometric feedback and energy harvesting soles</p>
+                    <div class="product-footer">
+                        <div class="product-price">$549</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(135deg, #ff6b6b, #0080ff, #00ff88);">🔮</div>
+                <div class="product-content">
+                    <h3>Metamorphic Pants</h3>
+                    <p>Shape-shifting fabric technology with integrated health monitoring systems</p>
+                    <div class="product-footer">
+                        <div class="product-price">$729</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="fade-in">
+        <div class="section-header">
+            <div class="section-subtitle">Why Choose Nexus</div>
+            <h2 class="section-title">Future Technology</h2>
+        </div>
+        <div class="features">
+            <div class="feature">
+                <span class="feature-icon">🧬</span>
+                <h3>Molecular Design</h3>
+                <p>Revolutionary fabric engineering at the molecular level for unprecedented performance and sustainability</p>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🌍</span>
+                <h3>Zero Impact</h3>
+                <p>Carbon-negative production processes using advanced biotechnology and renewable energy systems</p>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🤖</span>
+                <h3>AI Integration</h3>
+                <p>Smart clothing with embedded sensors and AI that adapts to your lifestyle and preferences</p>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🔬</span>
+                <h3>Lab Certified</h3>
+                <p>Every piece tested in our advanced research facility for durability, comfort, and innovation standards</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter fade-in">
+        <div class="section-subtitle">Join the Future</div>
+        <h2 class="section-title">Access Nexus Universe</h2>
+        <p>Get exclusive early access to new collections, insider updates, and revolutionary fashion innovations</p>
+        <div class="newsletter-form">
+            <input type="email" placeholder="Enter your neural link ID">
+            <button type="submit">Connect Now</button>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" title="Neural Network">🧠</a>
+                <a href="#" title="Quantum Channel">⚛️</a>
+                <a href="#" title="Hologram Feed">📡</a>
+                <a href="#" title="Data Stream">💾</a>
+            </div>
+            <p class="footer-text">&copy; 2025 NEXUS Fashion Labs. Reshaping reality through fashion technology.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loading screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 2000);
+        });
+
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Cursor hover effects
+        document.querySelectorAll('button, a, .product-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(1.5)';
+                cursorFollower.style.transform = 'scale(2)';
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursorFollower.style.transform = 'scale(1)';
+            });
+        });
+
+        // Smooth scrolling navigation
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Navigation scroll effect with advanced backdrop blur
+        let lastScrollY = window.scrollY;
+        
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const scrollY = window.scrollY;
+            
+            if (scrollY > 100) {
+                nav.style.background = 'rgba(0, 0, 0, 0.95)';
+                nav.style.backdropFilter = 'blur(40px) saturate(300%)';
+                nav.style.borderBottom = '1px solid rgba(0, 255, 136, 0.3)';
+            } else {
+                nav.style.background = 'rgba(0, 0, 0, 0.8)';
+                nav.style.backdropFilter = 'blur(30px) saturate(200%)';
+                nav.style.borderBottom = '1px solid rgba(255, 255, 255, 0.08)';
+            }
+
+            // Hide/show nav on scroll direction
+            if (scrollY > lastScrollY && scrollY > 200) {
+                nav.style.transform = 'translateY(-100%)';
+            } else {
+                nav.style.transform = 'translateY(0)';
+            }
+            lastScrollY = scrollY;
+        });
+
+        // Advanced scroll animations with stagger effect
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 200);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Product card 3D tilt effect
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+            });
+        });
+
+        // Floating orbs interactive movement
+        document.addEventListener('mousemove', (e) => {
+            const orbs = document.querySelectorAll('.orb');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            orbs.forEach((orb, index) => {
+                const speed = (index + 1) * 0.5;
+                const x = (mouseX - 0.5) * speed * 50;
+                const y = (mouseY - 0.5) * speed * 50;
+                
+                orb.style.transform += ` translate(${x}px, ${y}px)`;
+            });
+        });
+
+        // Newsletter form with advanced validation
+        const newsletterForm = document.querySelector('.newsletter-form');
+        const emailInput = newsletterForm.querySelector('input');
+        const submitBtn = newsletterForm.querySelector('button');
+
+        submitBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const email = emailInput.value.trim();
+            
+            if (email && isValidEmail(email)) {
+                // Success animation
+                submitBtn.style.background = 'linear-gradient(45deg, #00ff88, #0080ff)';
+                submitBtn.textContent = 'CONNECTED';
+                submitBtn.style.transform = 'scale(1.1)';
+                
+                setTimeout(() => {
+                    submitBtn.style.background = '';
+                    submitBtn.textContent = 'Connect Now';
+                    submitBtn.style.transform = 'scale(1)';
+                    emailInput.value = '';
+                    
+                    // Show success message
+                    showNotification('Neural link established! Welcome to the future. 🚀');
+                }, 2000);
+            } else {
+                // Error animation
+                emailInput.style.borderColor = '#ff0080';
+                emailInput.style.boxShadow = '0 0 20px rgba(255, 0, 128, 0.5)';
+                
+                setTimeout(() => {
+                    emailInput.style.borderColor = '';
+                    emailInput.style.boxShadow = '';
+                }, 1000);
+                
+                showNotification('Invalid neural link ID format. Please try again.', 'error');
+            }
+        });
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 30px;
+                background: ${type === 'success' ? 'rgba(0, 255, 136, 0.9)' : 'rgba(255, 0, 128, 0.9)'};
+                color: var(--darker);
+                padding: 1rem 2rem;
+                border-radius: 0;
+                font-weight: 600;
+                z-index: 10001;
+                transform: translateX(400px);
+                transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+                clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 15px 100%);
+                backdrop-filter: blur(20px);
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 4000);
+        }
+
+        // Add to cart functionality with animations
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                // Create floating cart icon
+                const cartIcon = document.createElement('div');
+                cartIcon.textContent = '🛒';
+                cartIcon.style.cssText = `
+                    position: fixed;
+                    left: ${e.clientX}px;
+                    top: ${e.clientY}px;
+                    font-size: 2rem;
+                    pointer-events: none;
+                    z-index: 10000;
+                    animation: floatToCart 1s ease-out forwards;
+                `;
+                document.body.appendChild(cartIcon);
+                
+                // Button success state
+                btn.style.background = '#00ff88';
+                btn.textContent = 'ADDED';
+                btn.style.transform = 'scale(1.1)';
+                
+                setTimeout(() => {
+                    btn.style.background = '';
+                    btn.textContent = 'Add to Cart';
+                    btn.style.transform = 'scale(1)';
+                }, 1500);
+                
+                setTimeout(() => {
+                    document.body.removeChild(cartIcon);
+                }, 1000);
+                
+                showNotification('Item added to quantum storage! ✨');
+            });
+        });
+
+        // Add keyframes for cart animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatToCart {
+                0% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-100px) translateX(50px) scale(0);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Advanced parallax effects
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            
+            // Hero grid parallax
+            const heroGrid = document.querySelector('.hero-grid');
+            if (heroGrid) {
+                heroGrid.style.transform = `translate(${scrolled * 0.1}px, ${scrolled * 0.1}px)`;
+            }
+            
+            // Floating orbs parallax
+            const orbs = document.querySelectorAll('.orb');
+            orbs.forEach((orb, index) => {
+                const speed = (index + 1) * 0.2;
+                orb.style.transform += ` translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Konami code easter egg
+        const konamiCode = [
+            'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+            'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+            'KeyB', 'KeyA'
+        ];
+        let userInput = [];
+
+        document.addEventListener('keydown', (e) => {
+            userInput.push(e.code);
+            userInput = userInput.slice(-konamiCode.length);
+            
+            if (userInput.join('') === konamiCode.join('')) {
+                activateHyperMode();
+            }
+        });
+
+        function activateHyperMode() {
+            document.body.style.animation = 'hyperMode 10s ease-in-out';
+            showNotification('HYPER MODE ACTIVATED! Reality distortion enabled. 🌈', 'success');
+            
+            // Add rainbow effect to all elements
+            const rainbowStyle = document.createElement('style');
+            rainbowStyle.textContent = `
+                @keyframes hyperMode {
+                    0%, 100% { filter: hue-rotate(0deg) saturate(1); }
+                    25% { filter: hue-rotate(90deg) saturate(2); }
+                    50% { filter: hue-rotate(180deg) saturate(3); }
+                    75% { filter: hue-rotate(270deg) saturate(2); }
+                }
+            `;
+            document.head.appendChild(rainbowStyle);
+            
+            setTimeout(() => {
+                document.body.style.animation = '';
+                document.head.removeChild(rainbowStyle);
+            }, 10000);
+        }
+
+        // Performance optimization: Throttle scroll events
+        function throttle(func, limit) {
+            let inThrottle;
+            return function() {
+                const args = arguments;
+                const context = this;
+                if (!inThrottle) {
+                    func.apply(context, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            }
+        }
+
+        // Apply throttling to scroll-heavy functions
+        window.addEventListener('scroll', throttle(() => {
+            // Scroll-dependent animations here
+        }, 16)); // ~60fps
+
+        // Initialize all systems
+        console.log('🚀 NEXUS Fashion Labs - System Online');
+        console.log('💫 Neural networks activated');
+        console.log('🔮 Quantum fashion engine ready');
+        console.log('🌟 Welcome to the future of fashion');
+    </script>
+</body>
+</html>

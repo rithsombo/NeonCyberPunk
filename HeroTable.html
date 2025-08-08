@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Michroma&family=Outfit:wght@100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+      body{
+        background-color: #222831;
+      }
+      .table {
+        border: 1;
+        background-color: #ffffff;
+        color: #222831;
+        padding: 16px;
+        border-radius: 10px;
+        font-family: "Outfit", sans-serif;
+        font-size: 15px;
+      }
+
+      .table .thead {
+        background-color: #2fb3ff;
+        padding: 10px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        color: #fff;
+      }
+
+      .table .tbody .row {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+      }
+
+      /* Fixed column widths */
+      .table .thead > div,
+      .table .tbody .row > div {
+        text-align: center;
+        flex: 1;
+      }
+
+      
+      .table .thead > div:nth-child(1),
+      .table .tbody .row > div:nth-child(1) {
+        flex: 1.5; 
+      }
+
+      .table .thead > div:nth-child(2),
+      .table .tbody .row > div:nth-child(2) {
+        flex: 0.8; 
+      }
+
+      .table .thead > div:nth-child(3),
+      .table .tbody .row > div:nth-child(3) {
+        flex: 1;
+      }
+
+      .table .thead > div:nth-child(4),
+      .table .tbody .row > div:nth-child(4) {
+        flex: 1.2;
+      }
+
+      .table .thead > div:nth-child(5),
+      .table .tbody .row > div:nth-child(5) {
+        flex: 1.5; 
+      }
+
+      .table .tbody .row div {
+        color: #222831;
+        padding: 8px;
+        margin: 2px;
+        border-radius: 4px;
+      }
+
+      .Action {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: center;
+        background-color: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .Action .edit,
+      .Action .delete {
+        color: #222831;
+        padding: 8px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        border: none;
+        background: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        width: 32px;
+        height: 32px;
+        position: relative;
+      }
+
+      .Action .edit::before {
+        content: "";
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        position: absolute;
+        top: -15px;
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      .Action .edit:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-1px);
+      }
+
+      .Action .edit:hover::before {
+        content: "Edit";
+        padding: 3px 12px;
+        background-color: #fff;
+        border-radius: 12px;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .Action .delete:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-1px);
+      }
+
+      .Action .delete::after {
+        content: "Delete";
+        position: absolute;
+        top: -10px;
+        padding: 3px 12px;
+        background-color: #ff2151;
+        border-radius: 12px;
+        opacity: 0;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        transform: translateY(15px);
+      }
+
+      .Action .delete:hover::after {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Icon styles */
+      .icon {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="table">
+      <div class="thead">
+        <div>Name</div>
+        <div>Age</div>
+        <div>Gender</div>
+        <div>Date of birth</div>
+        <div>Action</div>
+      </div>
+
+      <div class="tbody">
+        <div class="row">
+          <div>Lemonade</div>
+          <div>21</div>
+          <div>Male</div>
+          <div>22-May-2004</div>
+          <div class="Action">
+            <button class="edit" title="Edit">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path
+                  d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                />
+              </svg>
+            </button>
+            <button class="delete" title="Delete">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path
+                  d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>Orange Juice</div>
+          <div>25</div>
+          <div>Female</div>
+          <div>15-Jan-2000</div>
+          <div class="Action">
+            <button class="edit" title="Edit">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path
+                  d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                />
+              </svg>
+            </button>
+            <button class="delete" title="Delete">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path
+                  d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>Coffee</div>
+          <div>30</div>
+          <div>Male</div>
+          <div>08-Dec-1995</div>
+          <div class="Action">
+            <button class="edit" title="Edit">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path
+                  d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                />
+              </svg>
+            </button>
+            <button class="delete" title="Delete">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path
+                  d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
